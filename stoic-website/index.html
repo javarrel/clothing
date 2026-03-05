@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="[STOIC] — Premium streetwear. Graphic tees, hoodies, long-sleeves, and pants designed for those who move in silence.">
+<meta name="keywords" content="stoic clothing, streetwear, graphic tees, hoodies, urban fashion">
+<meta name="theme-color" content="#0a0a0a">
+<title>[STOIC] — Move In Silence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NEWSLETTER POPUP -->
+<div class="popup-overlay" id="popup">
+  <div class="popup">
+    <button class="popup-close" onclick="closePopup()" aria-label="Close popup">✕</button>
+    <div class="popup-tag">— EXCLUSIVE ACCESS</div>
+    <h2 class="popup-title">JOIN THE SILENCE</h2>
+    <p class="popup-subtitle">Subscribe and get 15% off your first order. Be the first to know about new drops, restocks, and exclusive releases.</p>
+    <div class="popup-form">
+      <input type="email" placeholder="YOUR EMAIL ADDRESS" aria-label="Email address">
+      <button class="btn btn-primary btn-full" onclick="subscribeNewsletter()">CLAIM 15% OFF →</button>
+    </div>
+    <button class="popup-skip" onclick="closePopup()">NO THANKS, I'LL PAY FULL PRICE</button>
+  </div>
+</div>
+
+<!-- SIZE GUIDE MODAL -->
+<div class="modal-overlay" id="sizeModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeSizeGuide()" aria-label="Close size guide">✕</button>
+    <h2 class="modal-title">SIZE GUIDE</h2>
+    <table class="size-table">
+      <thead><tr><th>SIZE</th><th>CHEST (IN)</th><th>WAIST (IN)</th><th>HIP (IN)</th><th>LENGTH (IN)</th></tr></thead>
+      <tbody>
+        <tr><td>XS</td><td>32–34</td><td>26–28</td><td>34–36</td><td>27</td></tr>
+        <tr><td>S</td><td>35–37</td><td>29–31</td><td>37–39</td><td>28</td></tr>
+        <tr><td>M</td><td>38–40</td><td>32–34</td><td>40–42</td><td>29</td></tr>
+        <tr><td>L</td><td>41–43</td><td>35–37</td><td>43–45</td><td>30</td></tr>
+        <tr><td>XL</td><td>44–46</td><td>38–40</td><td>46–48</td><td>31</td></tr>
+        <tr><td>XXL</td><td>47–50</td><td>41–44</td><td>49–52</td><td>32</td></tr>
+      </tbody>
+    </table>
+    <p style="color:var(--gray-500);font-size:12px;margin-top:20px;font-family:var(--font-mono);letter-spacing:1px;">All measurements are in inches. For best fit, measure your body and compare to the chart above.</p>
+  </div>
+</div>
+
+<!-- TOAST NOTIFICATION -->
+<div class="toast" id="toast">
+  <div class="toast-title" id="toastTitle">ADDED TO CART</div>
+  <div class="toast-msg" id="toastMsg">Item successfully added to your cart.</div>
+</div>
+
+<!-- NAVIGATION -->
+<nav id="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-logo" onclick="showPage('home')">[<span>STOIC</span>]</div>
+  <div class="nav-links">
+    <a href="#" onclick="showPage('home')" class="active" data-page="home">HOME</a>
+    <a href="#" onclick="showPage('shop')" data-page="shop">SHOP</a>
+    <a href="#" onclick="showPage('about')" data-page="about">ABOUT</a>
+    <a href="#" onclick="showPage('contact')" data-page="contact">CONTACT</a>
+  </div>
+  <div class="nav-actions">
+    <button class="dark-toggle" onclick="toggleDarkMode()">◑ THEME</button>
+    <button class="nav-icon-btn" onclick="showPage('wishlist')" aria-label="Wishlist">
+      ♡
+      <span class="wishlist-count" id="wishlistCount">0</span>
+    </button>
+    <button class="nav-icon-btn" onclick="showPage('cart')" aria-label="Shopping cart">
+      ⌗
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" onclick="showPage('home');toggleMenu()">HOME</a>
+  <a href="#" onclick="showPage('shop');toggleMenu()">SHOP</a>
+  <a href="#" onclick="showPage('about');toggleMenu()">ABOUT</a>
+  <a href="#" onclick="showPage('contact');toggleMenu()">CONTACT</a>
+  <a href="#" onclick="showPage('cart');toggleMenu()">CART</a>
+</div>
+
+<!-- ======================== HOME PAGE ======================== -->
+<div class="page active" id="page-home">
+  <!-- HERO -->
+  <section class="hero" aria-label="Hero banner">
+    <div class="hero-content">
+      <div class="hero-tag">SS 2025 COLLECTION</div>
+      <h1 class="hero-title">
+        MOVE<br>
+        <span class="line2">IN</span><br>
+        SILENCE
+      </h1>
+      <p class="hero-desc">Premium streetwear for those who let their presence speak. Graphic tees, hoodies, and essentials — designed without compromise.</p>
+      <div class="hero-btns">
+        <button class="btn btn-primary" onclick="showPage('shop')">SHOP NOW →</button>
+        <button class="btn btn-outline" onclick="document.getElementById('featured').scrollIntoView({behavior:'smooth'})">VIEW COLLECTION</button>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">04</div>
+          <div class="hero-stat-label">COLLECTIONS</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">12K+</div>
+          <div class="hero-stat-label">CUSTOMERS</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">100%</div>
+          <div class="hero-stat-label">QUALITY</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img-grid">
+        <div class="hero-img">
+          <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=600&q=80" alt="Featured hoodie" loading="lazy">
+          <div class="hero-img-badge">NEW DROP ✦</div>
+        </div>
+        <div class="hero-img">
+          <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=300&q=80" alt="Graphic tee" loading="lazy">
+        </div>
+        <div class="hero-img">
+          <img src="https://images.unsplash.com/photo-1547196927-1d3b5f5e5c8b?w=300&q=80" alt="Streetwear look" loading="lazy">
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">SCROLL DOWN</div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrapper" aria-hidden="true">
+    <div class="marquee-track">
+      <div class="marquee-item">GRAPHIC TEES <span class="dot">✦</span></div>
+      <div class="marquee-item">PREMIUM HOODIES <span class="dot">✦</span></div>
+      <div class="marquee-item">LONG SLEEVES <span class="dot">✦</span></div>
+      <div class="marquee-item">STREETWEAR PANTS <span class="dot">✦</span></div>
+      <div class="marquee-item">NEW ARRIVALS <span class="dot">✦</span></div>
+      <div class="marquee-item">FREE SHIPPING OVER ₱3000 <span class="dot">✦</span></div>
+      <div class="marquee-item">GRAPHIC TEES <span class="dot">✦</span></div>
+      <div class="marquee-item">PREMIUM HOODIES <span class="dot">✦</span></div>
+      <div class="marquee-item">LONG SLEEVES <span class="dot">✦</span></div>
+      <div class="marquee-item">STREETWEAR PANTS <span class="dot">✦</span></div>
+      <div class="marquee-item">NEW ARRIVALS <span class="dot">✦</span></div>
+      <div class="marquee-item">FREE SHIPPING OVER ₱3000 <span class="dot">✦</span></div>
+    </div>
+  </div>
+
+  <!-- FEATURED PRODUCTS -->
+  <section class="section" id="featured" aria-label="Featured products">
+    <div class="section-header">
+      <div>
+        <div class="section-label">✦ CURATED PICKS</div>
+        <h2 class="section-title">FEATURED</h2>
+      </div>
+      <div class="right">
+        <p class="section-subtitle">Our most coveted pieces, handpicked for the season.</p>
+        <button class="btn btn-outline mt-16" onclick="showPage('shop')">VIEW ALL →</button>
+      </div>
+    </div>
+    <div class="products-grid" id="featuredGrid">
+      <!-- Products injected by JS -->
+    </div>
+  </section>
+
+  <!-- NEW ARRIVALS SLIDER -->
+  <div class="slider-section" aria-label="New arrivals">
+    <div class="slider-header">
+      <div class="section-label">✦ JUST DROPPED</div>
+      <h2 class="section-title">NEW ARRIVALS</h2>
+    </div>
+    <div class="slider-track-wrap">
+      <div class="slider-track" id="sliderTrack">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+    <div class="slider-controls">
+      <button class="slider-btn" onclick="slideLeft()" aria-label="Previous">←</button>
+      <button class="slider-btn" onclick="slideRight()" aria-label="Next">→</button>
+    </div>
+  </div>
+
+  <!-- INSTAGRAM FEED -->
+  <section class="ig-section" aria-label="Instagram feed">
+    <div class="section-label">✦ @STOIC.WEARS</div>
+    <h2 class="section-title">FOLLOW US</h2>
+    <div class="ig-grid" id="igGrid">
+      <!-- Injected by JS -->
+    </div>
+    <div style="text-align:center;margin-top:40px">
+      <button class="btn btn-outline">FOLLOW ON INSTAGRAM →</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h2>[<span>STOIC</span>]</h2>
+        <p class="footer-desc">Premium streetwear for the quiet ones. Crafted with intention, worn with purpose. Move in silence, let your style speak.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Instagram">IG</a>
+          <a href="#" class="social-link" aria-label="TikTok">TK</a>
+          <a href="#" class="social-link" aria-label="Twitter">TW</a>
+          <a href="#" class="social-link" aria-label="Facebook">FB</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>SHOP</h3>
+        <ul>
+          <li><a href="#" onclick="showPage('shop')">Graphic Tees</a></li>
+          <li><a href="#" onclick="showPage('shop')">Hoodies</a></li>
+          <li><a href="#" onclick="showPage('shop')">Long Sleeves</a></li>
+          <li><a href="#" onclick="showPage('shop')">Pants</a></li>
+          <li><a href="#" onclick="showPage('shop')">New Arrivals</a></li>
+          <li><a href="#" onclick="showPage('shop')">Sale</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>HELP</h3>
+        <ul>
+          <li><a href="#">Sizing Guide</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Returns & Exchange</a></li>
+          <li><a href="#">Order Tracking</a></li>
+          <li><a href="#" onclick="showPage('contact')">Contact Us</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>NEWSLETTER</h3>
+        <p style="color:var(--gray-500);font-size:13px;line-height:1.7;margin-bottom:16px">Get early access to drops, exclusive offers, and behind-the-scenes content.</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Your email" aria-label="Newsletter email">
+          <button onclick="showToast('SUBSCRIBED!','Welcome to [STOIC] family.')">→</button>
+        </div>
+        <p style="color:var(--gray-500);font-size:11px;margin-top:12px;font-family:var(--font-mono);letter-spacing:1px">No spam. Unsubscribe anytime.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 [STOIC]. ALL RIGHTS RESERVED.</div>
+      <div class="payment-icons">
+        <div class="payment-icon">VISA</div>
+        <div class="payment-icon">MC</div>
+        <div class="payment-icon">GCASH</div>
+        <div class="payment-icon">MAYA</div>
+        <div class="payment-icon">COD</div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ======================== SHOP PAGE ======================== -->
+<div class="page" id="page-shop">
+  <div class="shop-header">
+    <div>
+      <div class="section-label">✦ ALL PRODUCTS</div>
+      <h1 class="section-title">SHOP</h1>
+    </div>
+    <p class="section-subtitle">Every piece tells a story of restraint and intention.</p>
+  </div>
+  <div class="shop-layout">
+    <!-- FILTERS -->
+    <aside class="shop-filters" aria-label="Product filters">
+      <div class="filter-group">
+        <div class="filter-title">CATEGORY</div>
+        <div class="filter-options">
+          <label class="filter-option"><input type="checkbox" checked onchange="filterProducts()"> Graphic Tees</label>
+          <label class="filter-option"><input type="checkbox" checked onchange="filterProducts()"> Hoodies</label>
+          <label class="filter-option"><input type="checkbox" checked onchange="filterProducts()"> Long Sleeves</label>
+          <label class="filter-option"><input type="checkbox" checked onchange="filterProducts()"> Pants</label>
+        </div>
+      </div>
+      <div class="filter-group">
+        <div class="filter-title">SIZE</div>
+        <div class="filter-options">
+          <label class="filter-option"><input type="checkbox" checked onchange="filterProducts()"> XS</label>
+          <label class="filter-option"><input type="checkbox" checked onchange="filterProducts()"> S</label>
+          <label class="filter-option"><input type="checkbox" checked onchange="filterProducts()"> M</label>
+          <label class="filter-option"><input type="checkbox" checked onchange="filterProducts()"> L</label>
+          <label class="filter-option"><input type="checkbox" checked onchange="filterProducts()"> XL</label>
+          <label class="filter-option"><input type="checkbox" checked onchange="filterProducts()"> XXL</label>
+        </div>
+      </div>
+      <div class="filter-group">
+        <div class="filter-title">COLOR</div>
+        <div class="color-filters">
+          <div class="color-swatch active" style="background:#0a0a0a;border:1px solid #444" title="Black" onclick="toggleSwatch(this)"></div>
+          <div class="color-swatch" style="background:#f5f5f0;border:1px solid #444" title="White" onclick="toggleSwatch(this)"></div>
+          <div class="color-swatch" style="background:#3a3a3a" title="Gray" onclick="toggleSwatch(this)"></div>
+          <div class="color-swatch" style="background:#e8ff00" title="Neon" onclick="toggleSwatch(this)"></div>
+          <div class="color-swatch" style="background:#ff2d2d" title="Red" onclick="toggleSwatch(this)"></div>
+          <div class="color-swatch" style="background:#00f0ff" title="Blue" onclick="toggleSwatch(this)"></div>
+          <div class="color-swatch" style="background:#2d3436" title="Navy" onclick="toggleSwatch(this)"></div>
+          <div class="color-swatch" style="background:#4a3728" title="Brown" onclick="toggleSwatch(this)"></div>
+        </div>
+      </div>
+      <div class="filter-group">
+        <div class="filter-title">PRICE RANGE</div>
+        <div class="price-range">
+          <input type="range" min="300" max="5000" value="5000" oninput="updatePrice(this.value)" aria-label="Max price">
+          <div class="price-display">
+            <span>₱300</span>
+            <span id="priceVal">₱5,000</span>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-outline btn-full mt-24" onclick="clearFilters()">CLEAR FILTERS</button>
+    </aside>
+
+    <!-- PRODUCTS -->
+    <div class="shop-products">
+      <div class="cat-pills">
+        <button class="cat-pill active" onclick="filterCat('all',this)">ALL</button>
+        <button class="cat-pill" onclick="filterCat('tee',this)">TEES</button>
+        <button class="cat-pill" onclick="filterCat('hoodie',this)">HOODIES</button>
+        <button class="cat-pill" onclick="filterCat('long-sleeve',this)">LONG SLEEVES</button>
+        <button class="cat-pill" onclick="filterCat('pants',this)">PANTS</button>
+      </div>
+      <div class="shop-toolbar">
+        <div class="shop-count" id="shopCount">24 PRODUCTS</div>
+        <select class="sort-select" onchange="sortProducts(this.value)" aria-label="Sort products">
+          <option value="featured">SORT: FEATURED</option>
+          <option value="newest">SORT: NEWEST</option>
+          <option value="price-asc">SORT: PRICE LOW-HIGH</option>
+          <option value="price-desc">SORT: PRICE HIGH-LOW</option>
+        </select>
+      </div>
+      <div class="products-grid" id="shopGrid">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER REPEATED (simplified) -->
+  <footer style="margin-top:80px">
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 [STOIC]. ALL RIGHTS RESERVED.</div>
+      <button class="btn btn-outline btn-sm" onclick="showPage('home')">← BACK HOME</button>
+    </div>
+  </footer>
+</div>
+
+<!-- ======================== PRODUCT DETAIL PAGE ======================== -->
+<div class="page" id="page-product">
+  <div class="product-detail">
+    <!-- GALLERY -->
+    <div class="product-gallery">
+      <div class="gallery-thumbs" id="galleryThumbs">
+        <!-- Injected -->
+      </div>
+      <div class="gallery-main">
+        <img id="galleryMain" src="" alt="Product image" loading="lazy">
+        <div class="gallery-zoom-hint">HOVER TO ZOOM</div>
+      </div>
+    </div>
+
+    <!-- INFO -->
+    <div class="product-info-panel">
+      <div class="product-breadcrumb">SHOP / <span id="pdCat"></span> / <span id="pdName2"></span></div>
+      
+      <div class="product-cat" id="pdCatLabel"></div>
+      <h1 class="product-detail-title" id="pdTitle"></h1>
+      <div class="product-detail-price">
+        <span id="pdPrice"></span>
+        <span class="original" id="pdOriginal"></span>
+      </div>
+
+      <label class="color-select-label">SELECT COLOR</label>
+      <div class="detail-colors" id="pdColors">
+        <div class="detail-color active" style="background:#0a0a0a;border:1px solid #555" onclick="selectDetailColor(this)"></div>
+        <div class="detail-color" style="background:#f5f5f0" onclick="selectDetailColor(this)"></div>
+        <div class="detail-color" style="background:#3a3a3a" onclick="selectDetailColor(this)"></div>
+        <div class="detail-color" style="background:#e8ff00" onclick="selectDetailColor(this)"></div>
+      </div>
+
+      <label class="size-select-label">SELECT SIZE — <button class="size-guide-link" onclick="openSizeGuide()">SIZE GUIDE</button></label>
+      <div class="detail-sizes" id="pdSizes">
+        <div class="detail-size" onclick="selectSize(this)">XS</div>
+        <div class="detail-size" onclick="selectSize(this)">S</div>
+        <div class="detail-size active" onclick="selectSize(this)">M</div>
+        <div class="detail-size" onclick="selectSize(this)">L</div>
+        <div class="detail-size" onclick="selectSize(this)">XL</div>
+        <div class="detail-size unavailable">XXL</div>
+      </div>
+
+      <div class="qty-add">
+        <div class="qty-selector">
+          <button class="qty-btn" onclick="changeQty(-1)">−</button>
+          <input class="qty-num" id="qtyInput" type="number" value="1" min="1" max="10" readonly>
+          <button class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+        <button class="btn btn-primary" style="flex:1" onclick="addToCart()">ADD TO CART</button>
+      </div>
+      <button class="btn btn-red btn-full" onclick="addToCart();showPage('cart')">BUY NOW →</button>
+
+      <div class="product-desc" id="pdDesc"></div>
+
+      <div class="product-meta">
+        <div class="meta-row">
+          <div class="meta-label">MATERIAL</div>
+          <div id="pdMaterial">100% Premium Cotton</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-label">FIT</div>
+          <div>Oversized / Relaxed</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-label">CARE</div>
+          <div>Machine wash cold, tumble dry low</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-label">ORIGIN</div>
+          <div>Made in the Philippines</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-label">SKU</div>
+          <div id="pdSKU">STC-001</div>
+        </div>
+      </div>
+
+      <!-- RELATED PRODUCTS -->
+      <div style="margin-top:60px">
+        <div class="section-label">✦ YOU MAY ALSO LIKE</div>
+        <div class="products-grid" id="relatedGrid" style="grid-template-columns:repeat(2,1fr);margin-top:24px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== ABOUT PAGE ======================== -->
+<div class="page" id="page-about">
+  <div class="about-hero">
+    <div class="about-hero-bg">
+      <div></div><div style="background:var(--gray-300)"></div><div></div>
+    </div>
+    <div class="about-hero-content">
+      <div class="section-label">✦ OUR STORY</div>
+      <h1 class="about-hero-title">WE ARE<br>[STOIC]</h1>
+    </div>
+  </div>
+
+  <div class="about-sections">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="label">THE BEGINNING</div>
+        <h2>BORN FROM QUIET STREETS</h2>
+        <p>In 2021, [STOIC] was born in the alleyways of Manila — not from a boardroom or a trend forecast, but from a genuine need for clothing that speaks without shouting.</p>
+        <p>Our founder, a graphic designer tired of fast fashion's empty promises, started screen-printing tees in a small garage. The philosophy was simple: wear less, mean more.</p>
+        <p>Today, [STOIC] has grown into a full streetwear brand with a community of thousands who share the same belief — that real style is about intention, not imitation.</p>
+      </div>
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=80" alt="Brand story" loading="lazy">
+        <div class="about-img-accent"></div>
+      </div>
+    </div>
+
+    <div class="about-grid reverse">
+      <div class="about-text">
+        <div class="label">THE DESIGN</div>
+        <h2>ART THAT LIVES ON FABRIC</h2>
+        <p>Every graphic in a [STOIC] piece is drawn by hand, distilled from philosophy, street culture, and raw emotion. We work with local Filipino artists who understand that clothing is the canvas of everyday life.</p>
+        <p>We don't chase trends. We set them quietly — releasing limited drops that create real desire, not manufactured hype. When a [STOIC] piece sells out, it's gone forever.</p>
+      </div>
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&q=80" alt="Design process" loading="lazy">
+        <div class="about-img-accent" style="top:-20px;left:-20px;bottom:auto;right:auto"></div>
+      </div>
+    </div>
+
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">♻</div>
+        <h3>SUSTAINABLE</h3>
+        <p class="value-card p">We use GOTS-certified organic cotton and water-based inks. Our packaging is 100% recyclable, and we're working toward carbon-neutral shipping by 2026.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🤝</div>
+        <h3>ETHICAL</h3>
+        <p>Every worker in our supply chain earns a living wage. We partner exclusively with factories that meet international labor standards and treat their teams with dignity.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🎨</div>
+        <h3>LOCAL FIRST</h3>
+        <p>From design to production, we keep it local. [STOIC] supports Filipino artists, printers, and manufacturers — keeping the money in the community that made us.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer style="margin-top:40px">
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 [STOIC]. ALL RIGHTS RESERVED.</div>
+      <button class="btn btn-outline btn-sm" onclick="showPage('shop')">SHOP NOW →</button>
+    </div>
+  </footer>
+</div>
+
+<!-- ======================== CART PAGE ======================== -->
+<div class="page" id="page-cart">
+  <div class="cart-layout">
+    <div>
+      <h1 class="cart-title">YOUR CART</h1>
+      <div id="cartItems">
+        <!-- Injected by JS -->
+      </div>
+      <div id="emptyCart" class="hidden" style="text-align:center;padding:80px 0">
+        <div style="font-family:var(--font-display);font-size:80px;opacity:0.2">∅</div>
+        <p style="color:var(--gray-500);margin:16px 0 32px;font-family:var(--font-mono);letter-spacing:2px;text-transform:uppercase">YOUR CART IS EMPTY</p>
+        <button class="btn btn-primary" onclick="showPage('shop')">START SHOPPING →</button>
+      </div>
+
+      <!-- CHECKOUT FORM -->
+      <div id="checkoutForm" class="checkout-form">
+        <h2 class="form-section-title">SHIPPING INFO</h2>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">FIRST NAME</label><input class="form-input" type="text" placeholder="Juan" aria-label="First name"></div>
+          <div class="form-group"><label class="form-label">LAST NAME</label><input class="form-input" type="text" placeholder="Dela Cruz" aria-label="Last name"></div>
+        </div>
+        <div class="form-group"><label class="form-label">EMAIL</label><input class="form-input" type="email" placeholder="you@email.com" aria-label="Email"></div>
+        <div class="form-group"><label class="form-label">PHONE</label><input class="form-input" type="tel" placeholder="+63 9XX XXX XXXX" aria-label="Phone number"></div>
+        <div class="form-group"><label class="form-label">ADDRESS</label><input class="form-input" type="text" placeholder="Street, Barangay" aria-label="Address"></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">CITY</label><input class="form-input" type="text" placeholder="City" aria-label="City"></div>
+          <div class="form-group"><label class="form-label">ZIP CODE</label><input class="form-input" type="text" placeholder="1234" aria-label="ZIP code"></div>
+        </div>
+
+        <h2 class="form-section-title">PAYMENT</h2>
+        <div class="form-group">
+          <label class="form-label">PAYMENT METHOD</label>
+          <select class="form-input" aria-label="Payment method">
+            <option>Cash on Delivery (COD)</option>
+            <option>GCash</option>
+            <option>Maya</option>
+            <option>Credit/Debit Card</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">CARD NUMBER</label><input class="form-input" type="text" placeholder="1234 5678 9012 3456" aria-label="Card number"></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">EXPIRY</label><input class="form-input" type="text" placeholder="MM/YY" aria-label="Card expiry"></div>
+          <div class="form-group"><label class="form-label">CVV</label><input class="form-input" type="text" placeholder="123" aria-label="CVV"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ORDER SUMMARY -->
+    <div>
+      <div class="cart-summary">
+        <div class="summary-title">ORDER SUMMARY</div>
+        <div id="summaryItems"></div>
+        <div class="summary-row">
+          <span class="summary-label">SUBTOTAL</span>
+          <span id="subtotal">₱0</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">SHIPPING</span>
+          <span id="shipping">₱150</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">DISCOUNT</span>
+          <span id="discount" style="color:var(--accent2)">—</span>
+        </div>
+        <div class="summary-row" style="border-top:1px solid var(--gray-300);margin-top:8px">
+          <span style="font-weight:600">TOTAL</span>
+          <span class="summary-total" id="total">₱0</span>
+        </div>
+
+        <div class="promo-form">
+          <input type="text" id="promoInput" placeholder="PROMO CODE" aria-label="Promo code">
+          <button onclick="applyPromo()">APPLY</button>
+        </div>
+
+        <button class="btn btn-primary btn-full" onclick="placeOrder()">PLACE ORDER →</button>
+        <button class="btn btn-outline btn-full mt-16" onclick="showPage('shop')">CONTINUE SHOPPING</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== CONTACT PAGE ======================== -->
+<div class="page" id="page-contact">
+  <div class="contact-layout">
+    <div class="contact-info">
+      <div class="section-label">✦ GET IN TOUCH</div>
+      <h1 class="contact-info h1">TALK<br>TO US</h1>
+      <p>We're real people who care. Whether you have a question about sizing, an order issue, or just want to say hi — we're here.</p>
+
+      <div class="contact-detail">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-detail-label">LOCATION</div>
+          <div class="contact-detail-value">123 Bonifacio St., Antipolo<br>Rizal, Philippines</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">📧</div>
+        <div>
+          <div class="contact-detail-label">EMAIL</div>
+          <div class="contact-detail-value">hello@stoicwears.com</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">📱</div>
+        <div>
+          <div class="contact-detail-label">PHONE / VIBER</div>
+          <div class="contact-detail-value">+63 917 123 4567</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <div class="contact-detail-label">STORE HOURS</div>
+          <div class="contact-detail-value">Mon–Sat: 10AM – 8PM<br>Sun: 12PM – 6PM</div>
+        </div>
+      </div>
+
+      <div class="social-links" style="margin-top:8px">
+        <a href="#" class="social-link" aria-label="Instagram">IG</a>
+        <a href="#" class="social-link" aria-label="TikTok">TK</a>
+        <a href="#" class="social-link" aria-label="Twitter">TW</a>
+        <a href="#" class="social-link" aria-label="Facebook">FB</a>
+      </div>
+    </div>
+
+    <div class="contact-form-wrap">
+      <div class="contact-form-title">SEND A MESSAGE</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">FIRST NAME</label><input class="form-input" type="text" placeholder="Juan" aria-label="First name"></div>
+        <div class="form-group"><label class="form-label">LAST NAME</label><input class="form-input" type="text" placeholder="Dela Cruz" aria-label="Last name"></div>
+      </div>
+      <div class="form-group"><label class="form-label">EMAIL</label><input class="form-input" type="email" placeholder="you@email.com" aria-label="Email"></div>
+      <div class="form-group">
+        <label class="form-label">SUBJECT</label>
+        <select class="form-input" aria-label="Message subject">
+          <option>Order Inquiry</option>
+          <option>Sizing Help</option>
+          <option>Return / Exchange</option>
+          <option>Collaboration</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group"><label class="form-label">MESSAGE</label><textarea class="form-input" placeholder="Tell us what's on your mind..." rows="5" aria-label="Message"></textarea></div>
+      <button class="btn btn-primary btn-full" onclick="sendMessage()">SEND MESSAGE →</button>
+    </div>
+  </div>
+
+  <footer style="margin-top:40px">
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 [STOIC]. ALL RIGHTS RESERVED.</div>
+      <button class="btn btn-outline btn-sm" onclick="showPage('home')">← BACK HOME</button>
+    </div>
+  </footer>
+</div>
+
+<!-- ======================== WISHLIST PAGE ======================== -->
+<div class="page" id="page-wishlist">
+  <div style="padding:140px 60px 80px">
+    <div class="section-label">✦ SAVED ITEMS</div>
+    <h1 class="section-title" style="margin-bottom:48px">WISHLIST</h1>
+    <div class="products-grid" id="wishlistGrid">
+      <!-- Injected by JS -->
+    </div>
+    <div id="emptyWishlist" class="hidden" style="text-align:center;padding:80px 0">
+      <div style="font-family:var(--font-display);font-size:80px;opacity:0.2">♡</div>
+      <p style="color:var(--gray-500);margin:16px 0 32px;font-family:var(--font-mono);letter-spacing:2px;text-transform:uppercase">YOUR WISHLIST IS EMPTY</p>
+      <button class="btn btn-primary" onclick="showPage('shop')">BROWSE PRODUCTS →</button>
+    </div>
+  </div>
+</div>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<!-- LIVE CHAT WIDGET -->
+<div class="chat-widget">
+  <button class="chat-btn" onclick="toggleChat()" aria-label="Open live chat">
+    <div class="chat-dot"></div>
+    <span class="chat-label">LIVE CHAT</span>
+  </button>
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-panel-header">
+      <span class="chat-panel-title">STOIC SUPPORT</span>
+      <button class="chat-close" onclick="toggleChat()">✕</button>
+    </div>
+    <div class="chat-body">👋 Hey! We're online and ready to help. Ask us anything about your order, sizing, or products.</div>
+    <div class="chat-input-row">
+      <input type="text" placeholder="Type a message..." aria-label="Chat message">
+      <button class="chat-send" onclick="sendChat()">→</button>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="js/main.js"></script>
+</body>
+</html>
